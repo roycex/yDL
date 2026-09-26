@@ -240,10 +240,17 @@ class yifile:
                         uptcallback(self)
                         uptcounter = 0
                     speed = int(file_size_dl / self.timecost)
-                    print("%s:%.2f%% %s/%s %s S %s/S     " % (
+                    # 预计完成时间：剩余字节 / 当前速率（首 tick 速率可能偏小，属正常）
+                    if speed > 0:
+                        remaining = float(self.filesize) - self.downloadsize
+                        eta = remaining / speed
+                    else:
+                        eta = 0
+                    print("%s:%.2f%% %s/%s %s S %s/S ETA %s     " % (
                         self.filename, float(self.downloadsize) / float(self.filesize) * 100,
                         yifile.formatFileSize(self.downloadsize), yifile.formatFileSize(self.filesize),
-                        str(self.timecost), yifile.formatFileSize(speed)), end="\r")
+                        str(self.timecost), yifile.formatFileSize(speed),
+                        yifile._formatEta(eta)), end="\r")
                     uptcounter += 1
                 f.close()
                 self.status = 2
@@ -278,3 +285,23 @@ class yifile:
         else:
             f = "%d Bytes" % size
         return f
+
+    def _formatEta(seconds):
+        """把剩余秒数格式化为可读剩余时间：不足 1 分钟显示 <1m；
+        不足 1 天不显示 d，不足 1 小时不显示 h；数字与单位间无空格、不补零。
+        例：2m / 1h / 1h5m / 1d / 3d5h9m"""
+        seconds = int(seconds)
+        if seconds < 60:
+            return "<1m"
+        d = seconds // 86400
+        h = (seconds % 86400) // 3600
+        m = (seconds % 3600) // 60
+        parts = []
+        if d > 0:
+            parts.append("%dd" % d)
+        if h > 0:
+            parts.append("%dh" % h)
+        if m > 0:
+            parts.append("%dm" % m)
+        # 兜底：理论上 seconds>=60 时 m>=1，这里仅防意外
+        return "".join(parts) if parts else "1m"
