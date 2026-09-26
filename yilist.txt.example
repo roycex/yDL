@@ -1,0 +1,7 @@
+# yifile 分享链接清单：每行一个链接（取每行第一列，Tab 分隔时只读第一列）
+# 以 # 开头的行是注释，会被忽略
+#
+# 重要：必须保留链接 # 后面的 16 位片段（防盗链 key），缺失会导致下载被拒绝（403）
+# 直接从浏览器复制完整地址即可，例如：
+# https://www.yifile.com/f/xxxxxxxx#AAAAAAAAAAAAAAAA
+# https://www.yifile.com/file/xxxxxxxx

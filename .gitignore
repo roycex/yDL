@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+
+# PyInstaller build artifacts
+dist/
+build/
+*.spec
+
+# Runtime data — do NOT commit user downloads / task DB
+db/
+downloads/
+*.sqlite3
+*.downloading
+
+# Backups / unrelated helpers
+*.bak
+datatransfer.py
+
+# OS
+Thumbs.db
+.DS_Store
