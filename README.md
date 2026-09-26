@@ -1,6 +1,6 @@
-# yifileDownloader 使用说明
+# yDL 使用说明
 
-yifile.com（翼存网盘）批量下载工具。把分享链接写进清单，程序自动完成：
+y网盘批量下载工具。把分享链接写进清单，程序自动完成：
 解析文件页 → 免费下载预检（freedl）→ 等待站点 30 秒倒计时 → 识别验证码换取直链 → 分块下载 → 完成后自动改名。
 下载任务记录在本地 SQLite 数据库中，已完成的文件重新运行时自动跳过。
 
@@ -10,7 +10,7 @@ yifile.com（翼存网盘）批量下载工具。把分享链接写进清单，�
    - 支持 `/f/` 短链和 `/file/` 长链两种格式
    - **必须保留链接 `#` 后面的 16 位片段**（如 `/f/xxxxxx#FHwrR-0g4qs-_pij`），
      它是防盗链 key，缺失会导致下载被服务器拒绝（403）
-2. 双击运行 `yifileDownloader.exe`（或在本目录命令行执行）
+2. 双击运行 `执行文件`（或在本目录命令行执行）
 3. 文件会下载到 `downloads/` 目录，完成后在数据库中标记，下次运行自动跳过已完成任务
 
 ## 下载流程与耗时
@@ -28,7 +28,7 @@ yifile.com（翼存网盘）批量下载工具。把分享链接写进清单，�
 
 ```
 release/
-├── yifileDownloader.exe   主程序（单文件，免安装）
+├── xxxx.exe   主程序（单文件，免安装）
 ├── main.ini               配置文件（必须与 exe 同目录运行）
 ├── yilist.txt             下载链接清单
 ├── db/data.sqlite3        任务数据库（首次运行自动创建）
@@ -51,8 +51,8 @@ datasource=./db/data.sqlite3   # 任务数据库路径
 - 每行一个链接，取每行第一列（Tab 分隔时只读第一列，可直接粘贴带说明的表格行）
 - 以 `#` 开头的行会被忽略（注释）
 - 链接形如：
-  - `https://www.yifile.com/f/xxxxxxxx#AAAAAAAAAAAAAAAA`（短链 + 防盗链片段，推荐直接从浏览器复制完整地址）
-  - `https://www.yifile.com/file/xxxxxxxx`（旧式长链）
+  - `https://www.yxxxx.com/f/xxxxxxxx#AAAAAAAAAAAAAAAA`（短链 + 防盗链片段，推荐直接从浏览器复制完整地址）
+  - `https://www.yxxxx.com/file/xxxxxxxx`（旧式长链）
 
 ## 断点续传（重要变更）
 
@@ -77,7 +77,6 @@ datasource=./db/data.sqlite3   # 任务数据库路径
 
 ## 源码与重建
 
-源码位于 `penn945-yifileDownloader-f74925e/`：
 
 - `Main.py` 入口（配置、任务库、调度）
 - `yifile.py` 核心下载类（页面解析、freedl 预检、验证码换直链、下载）
@@ -88,7 +87,7 @@ datasource=./db/data.sqlite3   # 任务数据库路径
 
 ```bash
 pip install pillow pyinstaller
-pyinstaller --onefile --name yifileDownloader Main.py
+pyinstaller --onefile --name xxxxx Main.py
 ```
 
 模板库重建（需要 `_build/` 下的标注样本与脚本）：
